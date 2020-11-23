@@ -1,15 +1,23 @@
 <script>
-  import Form from './Form.svelte'
-  import Life from './Life.svelte'
-  // TODO get these from form
-  let yearsToLive = 50
-  let dateOfBirth = new Date('1990-07-31')
+  import Life from "./Life.svelte";
 
-  function handleThings(thing) {
-    dateOfBirth = new Date(thing)
-    console.log(dateOfBirth)
-  }
+  // defaults
+  $: yearsToLive = 50;
+  let dateString = "1990-07-31";
+  $: dateOfBirth = new Date(dateString);
 </script>
 
-<Form fn={handleThings} />
+<style>
+  fieldset {
+    padding: 0;
+    border: none;
+    height: 25px;
+  }
+</style>
+
+<!-- <Form fn={handleThings} /> -->
+<fieldset>
+  <label for="birthDate">Date of Birth: <input type="text" name="birthDate" bind:value={dateString} /> </label>
+  <label for="lifeYears">Years to Live: <input type="number" name="lifeYears" bind:value={yearsToLive} /> </label>
+</fieldset>
 <Life yearsToLive={yearsToLive + 1} {dateOfBirth} />

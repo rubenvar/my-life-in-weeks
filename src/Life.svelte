@@ -1,32 +1,28 @@
 <script>
-  import Year from './Year.svelte'
-  export let yearsToLive
-  export let dateOfBirth
+  import Year from "./Year.svelte";
+  export let yearsToLive;
+  export let dateOfBirth;
+  $: console.log(dateOfBirth);
 
-  const weeksPerYear = 52
+  const weeksPerYear = 52;
   // weeks for header, duplicated with weeks in Year component
   const weeks = Array(weeksPerYear)
     .fill(null)
-    .map((_, i) => i + 1)
+    .map((_, i) => i + 1);
   // create array of years
   $: years = Array(yearsToLive)
     .fill(null)
-    .map((_, i) => yearOfBirth + i)
+    .map((_, i) => yearOfBirth + i);
 
-  const yearOfBirth = dateOfBirth.getFullYear()
-  const yearOfBirthStart = new Date(yearOfBirth, 0, 1)
-  const weekOfBirth = Math.ceil(
-    ((dateOfBirth - yearOfBirthStart) / 86400000 +
-      yearOfBirthStart.getDay() +
-      1) /
-      7,
-  )
+  $: yearOfBirth = dateOfBirth.getFullYear();
+  $: yearOfBirthStart = new Date(yearOfBirth, 0, 1);
+  $: weekOfBirth = Math.ceil(((dateOfBirth - yearOfBirthStart) / 86400000 + yearOfBirthStart.getDay() + 1) / 7);
 </script>
 
 <style>
   .life {
     padding: 12px;
-    height: calc(100% - 24px);
+    height: calc(100vh - 24px - 25px);
     display: grid;
     grid-template-rows: 1fr repeat(var(--years), 1fr);
     gap: 3px;
@@ -55,10 +51,6 @@
   </div>
   <!-- all the years -->
   {#each years as year}
-    <Year
-      {year}
-      {weekOfBirth}
-      birth={year === yearOfBirth}
-      death={year === yearOfBirth + yearsToLive - 1} />
+    <Year {year} {weekOfBirth} birth={year === yearOfBirth} death={year === yearOfBirth + yearsToLive - 1} />
   {/each}
 </div>
