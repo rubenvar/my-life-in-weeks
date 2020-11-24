@@ -2,7 +2,6 @@
   import Year from "./Year.svelte";
   export let yearsToLive;
   export let dateOfBirth;
-  $: console.log(dateOfBirth);
 
   const weeksPerYear = 52;
   // weeks for header, duplicated with weeks in Year component
@@ -51,6 +50,11 @@
   </div>
   <!-- all the years -->
   {#each years as year}
-    <Year {year} {weekOfBirth} birth={year === yearOfBirth} death={year === yearOfBirth + yearsToLive - 1} />
+    <Year
+      {year}
+      {weekOfBirth}
+      {yearOfBirth}
+      birth={year === yearOfBirth}
+      death={year === yearOfBirth + yearsToLive - 1} />
   {/each}
 </div>
