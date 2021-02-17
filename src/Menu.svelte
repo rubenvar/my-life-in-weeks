@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { showMenu, yearsToLive, dateString } from "./stores";
 </script>
 
@@ -15,8 +15,7 @@
         name="lifeYears"
         bind:value={$yearsToLive}
         min="0"
-        max="100"
-      />
+        max="100" />
     </label>
   </fieldset>
 </aside>

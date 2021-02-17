@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Year from "./Year.svelte";
   import { yearsToLive } from "./stores";
   export let dateOfBirth;
@@ -38,8 +38,7 @@
       {weekOfBirth}
       {yearOfBirth}
       birth={year === yearOfBirth}
-      death={year === yearOfBirth + $yearsToLive + 1 - 1}
-    />
+      death={year === yearOfBirth + $yearsToLive + 1 - 1} />
   {/each}
 </div>
 

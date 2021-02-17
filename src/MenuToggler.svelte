@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { showMenu } from "./stores";
   const toggleMenu = () => showMenu.update(() => !$showMenu);
 </script>

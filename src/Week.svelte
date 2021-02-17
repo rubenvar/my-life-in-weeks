@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   export let week;
   export let year;
   export let half;
@@ -18,6 +18,12 @@
   }
 </script>
 
+<div id="{year}-{week}" style="background-color: {color};">
+  {#if content !== undefined}{content}{/if}
+</div>
+
+<!-- class={disabled ? 'disabled' : past ? 'past' : current ? 'current' : ''} -->
+
 <style>
   div {
     background: white;
@@ -27,9 +33,3 @@
     justify-items: center;
   }
 </style>
-
-<div id="{year}-{week}" style="background-color: {color};">
-  {#if content !== undefined}{content}{/if}
-</div>
-
-<!-- class={disabled ? 'disabled' : past ? 'past' : current ? 'current' : ''} -->

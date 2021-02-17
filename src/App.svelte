@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import GitHubCorner from "./GitHubCorner.svelte";
   import Life from "./Life.svelte";
   import Menu from "./Menu.svelte";
