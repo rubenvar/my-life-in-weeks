@@ -22,10 +22,10 @@
     "svelte": "^3.32.3",
     "svelte-check": "^1.1.35",
     "svelte-preprocess": "^4.6.9",
+    "tslib": "^2.1.0",
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "sirv-cli": "^1.0.11",
-    "tslib": "^2.1.0"
+    "sirv-cli": "^1.0.11"
   }
 }
