@@ -1,19 +1,19 @@
 <script lang="ts">
-  export let week;
-  export let year;
-  export let half;
-  export let past;
-  export let current;
-  export let disabled;
-  export let content;
+  export let week: number;
+  export let year: number;
+  export let isHalf: boolean;
+  export let isPast: boolean;
+  export let isCurrent: boolean;
+  export let isDisabled: boolean;
+  export let content: number;
 
   let color = "white";
   $: {
-    if (disabled) color = "transparent";
-    else if (past && half) color = "hsl(39, 100%, 65%)";
-    else if (past) color = "orange";
-    else if (half) color = "#fafafa";
-    else if (current) color = "red";
+    if (isDisabled) color = "transparent";
+    else if (isPast && isHalf) color = "hsl(39, 100%, 65%)";
+    else if (isPast) color = "orange";
+    else if (isHalf) color = "#fafafa";
+    else if (isCurrent) color = "red";
     else color = "white";
   }
 </script>
@@ -21,8 +21,6 @@
 <div id="{year}-{week}" style="background-color: {color};">
   {#if content !== undefined}{content}{/if}
 </div>
-
-<!-- class={disabled ? 'disabled' : past ? 'past' : current ? 'current' : ''} -->
 
 <style>
   div {

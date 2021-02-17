@@ -1,7 +1,7 @@
 <script lang="ts">
   import Year from "./Year.svelte";
   import { yearsToLive } from "./stores";
-  export let dateOfBirth;
+  export let dateOfBirth: Date;
 
   const weeksPerYear = 52;
   // weeks for header, duplicated with weeks in Year component
@@ -16,7 +16,7 @@
   $: yearOfBirth = dateOfBirth.getFullYear();
   $: yearOfBirthStart = new Date(yearOfBirth, 0, 1);
   $: weekOfBirth = Math.ceil(
-    ((dateOfBirth - yearOfBirthStart) / 86400000 +
+    ((dateOfBirth.valueOf() - yearOfBirthStart.valueOf()) / 86400000 +
       yearOfBirthStart.getDay() +
       1) /
       7
@@ -37,8 +37,8 @@
       {year}
       {weekOfBirth}
       {yearOfBirth}
-      birth={year === yearOfBirth}
-      death={year === yearOfBirth + $yearsToLive + 1 - 1} />
+      isBirth={year === yearOfBirth}
+      isDeath={year === yearOfBirth + $yearsToLive + 1 - 1} />
   {/each}
 </div>
 

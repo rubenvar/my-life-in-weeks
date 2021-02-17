@@ -1,35 +1,36 @@
 <script lang="ts">
   import Week from "./Week.svelte";
-  export let year;
-  export let birth;
-  export let death;
-  export let yearOfBirth;
-  export let weekOfBirth;
-  // $: yearOfBirth;
-  // $: weekOfBirth;
-  // $: console.log(yearOfBirth);
+  export let year: number;
+  export let isBirth: boolean;
+  export let isDeath: boolean;
+  export let yearOfBirth: number;
+  export let weekOfBirth: number;
 
-  let weeksPerYear = 52;
-  let weeks = Array(weeksPerYear)
+  let weeksPerYear: number = 52;
+  let weeks: number[] = Array(weeksPerYear)
     .fill(null)
     .map((_, i) => i + 1);
 
-  const now = new Date();
-  const currentYear = now.getFullYear();
-  const yearStart = new Date(currentYear, 0, 1);
+  const now: Date = new Date();
+  const currentYear: number = now.getFullYear();
+  const yearStart: Date = new Date(currentYear, 0, 1);
   // get current week in JS
-  const currentWeek = Math.ceil(
-    ((now - yearStart) / 86400000 + yearStart.getDay() + 1) / 7
+  const currentWeek: number = Math.ceil(
+    ((now.valueOf() - yearStart.valueOf()) / 86400000 +
+      yearStart.getDay() +
+      1) /
+      7
   );
 
-  $: isPast = (week) =>
+  $: checkIsPast = (week: number): boolean =>
     year < currentYear || (year === currentYear && week < currentWeek);
-  $: isDisabled = (week) =>
-    (birth && week < weekOfBirth) || (death && week > weekOfBirth);
-  $: isCurrent = (week) => year === currentYear && week === currentWeek;
-  $: isHalf = (week) =>
+  $: checkIsDisabled = (week: number): boolean =>
+    (isBirth && week < weekOfBirth) || (isDeath && week > weekOfBirth);
+  $: checkIsCurrent = (week: number): boolean =>
+    year === currentYear && week === currentWeek;
+  $: checkIsHalf = (week: number): boolean =>
     week === 52 / 4 || week === 52 / 2 || week === (52 * 3) / 4;
-  $: getContent = (week) =>
+  $: getContent = (week: number): number =>
     week === weekOfBirth && (year - yearOfBirth) % 5 === 0
       ? year - yearOfBirth
       : undefined;
@@ -41,10 +42,10 @@
     <Week
       {year}
       {week}
-      past={isPast(week)}
-      disabled={isDisabled(week)}
-      current={isCurrent(week)}
-      half={isHalf(week)}
+      isPast={checkIsPast(week)}
+      isDisabled={checkIsDisabled(week)}
+      isCurrent={checkIsCurrent(week)}
+      isHalf={checkIsHalf(week)}
       content={getContent(week)} />
   {/each}
 </div>
