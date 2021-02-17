@@ -25,9 +25,10 @@
 <style>
   div {
     background: white;
-    font-size: 7px;
+    font-size: 5px;
     display: grid;
     align-items: center;
     justify-items: center;
+    border-radius: 2px;
   }
 </style>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  // TODO lower font-size as there are more yearsToLive so the boxes don't go out of ViewPort...
   import GitHubCorner from "./GitHubCorner.svelte";
   import Life from "./Life.svelte";
   import Menu from "./Menu.svelte";

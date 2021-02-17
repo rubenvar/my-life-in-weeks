@@ -44,11 +44,12 @@
 
 <style>
   .life {
+    --weekMargin: 3px;
     padding: 12px;
     height: 100vh;
     display: grid;
     grid-template-rows: 1fr repeat(var(--years), 1fr);
-    gap: 3px;
+    gap: var(--weekMargin);
     background: #eee;
   }
   .header {

@@ -54,7 +54,7 @@
   .year {
     display: grid;
     grid-template-columns: 1fr repeat(52, 1fr);
-    gap: 3px;
+    gap: var(--weekMargin);
   }
   .year-name {
     font-size: 7px;
