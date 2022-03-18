@@ -4,10 +4,13 @@
   import Life from "./Life.svelte";
   import Menu from "./Menu.svelte";
   import MenuToggler from "./MenuToggler.svelte";
-  import { yearsToLive, dateString } from "./stores";
+  import { yearsToLive } from "./stores/years";
+  import { dateString } from "./stores/date";
 
+  // TODO improve these (limits for years input):
   $: if ($yearsToLive < 1) $yearsToLive = 1;
   $: if ($yearsToLive > 100) $yearsToLive = 100;
+
   $: dateOfBirth = new Date($dateString);
 </script>
 

@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { showMenu } from "./stores";
-  const toggleMenu = (): void => showMenu.update(() => !$showMenu);
+  import { showMenu } from "./stores/menu";
 </script>
 
-<button class:show={$showMenu} on:click={toggleMenu}>
+<button class:show={$showMenu} on:click={showMenu.toggle}>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     class="icon icon-tabler icon-tabler-chevrons-right"
@@ -28,7 +27,7 @@
     left: 36px;
     z-index: 99;
     font-size: 22px;
-    border-radius: none;
+    border-radius: 50%;
     box-shadow: none;
     border: none;
     background-color: transparent;
