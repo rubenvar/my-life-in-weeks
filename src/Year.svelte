@@ -24,7 +24,6 @@
 
   const now: Date = new Date();
   const currentYear: number = now.getFullYear();
-  const yearStart: Date = new Date(currentYear, 0, 1);
   // get current week in JS
   const currentWeek = dayjs().isoWeek();
 
