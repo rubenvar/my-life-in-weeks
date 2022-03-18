@@ -1,15 +1,15 @@
 <script lang="ts">
   import Year from "./Year.svelte";
-  import { yearsToLive } from "./stores";
+  import { yearsToLive } from "./stores/years";
   export let dateOfBirth: Date;
 
-  const weeksPerYear = 52;
+  const maxWeeksInYear = 53;
   // weeks for header, duplicated with weeks in Year component
-  const weeks = Array(weeksPerYear)
+  const weeks = Array(maxWeeksInYear)
     .fill(null)
     .map((_, i) => i + 1);
   // create array of years
-  $: years = Array($yearsToLive + 1)
+  $: yearsArray = Array($yearsToLive + 1)
     .fill(null)
     .map((_, i) => yearOfBirth + i);
 
@@ -32,7 +32,7 @@
     {/each}
   </div>
   <!-- all the years -->
-  {#each years as year}
+  {#each yearsArray as year}
     <Year
       {year}
       {weekOfBirth}
@@ -54,7 +54,7 @@
   }
   .header {
     display: grid;
-    grid-template-columns: 1fr repeat(52, 1fr);
+    grid-template-columns: 1fr repeat(53, 1fr);
     font-size: 7px;
     text-align: center;
   }

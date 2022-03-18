@@ -1,13 +1,24 @@
 <script lang="ts">
   import Week from "./Week.svelte";
+  import dayjs from "dayjs";
+  import isoWeeksInYear from "dayjs/plugin/isoWeeksInYear";
+  import isLeapYear from "dayjs/plugin/isLeapYear";
+  import weekOfYear from "dayjs/plugin/weekOfYear";
+  import isoWeek from "dayjs/plugin/isoWeek";
+
+  dayjs.extend(isoWeeksInYear);
+  dayjs.extend(isLeapYear);
+  dayjs.extend(weekOfYear);
+  dayjs.extend(isoWeek);
+
   export let year: number;
   export let isBirth: boolean;
   export let isDeath: boolean;
   export let yearOfBirth: number;
   export let weekOfBirth: number;
 
-  let weeksPerYear: number = 52;
-  let weeks: number[] = Array(weeksPerYear)
+  let weeksInYear = dayjs(`${year}-01-01`).isoWeeksInYear();
+  let weeks: number[] = Array(weeksInYear)
     .fill(null)
     .map((_, i) => i + 1);
 
@@ -15,20 +26,15 @@
   const currentYear: number = now.getFullYear();
   const yearStart: Date = new Date(currentYear, 0, 1);
   // get current week in JS
-  const currentWeek: number = Math.ceil(
-    ((now.valueOf() - yearStart.valueOf()) / 86400000 +
-      yearStart.getDay() +
-      1) /
-      7
-  );
+  const currentWeek = dayjs().isoWeek();
 
-  $: checkIsPast = (week: number): boolean =>
+  $: checkIsPast = (week: number) =>
     year < currentYear || (year === currentYear && week < currentWeek);
-  $: checkIsDisabled = (week: number): boolean =>
+  $: checkIsDisabled = (week: number) =>
     (isBirth && week < weekOfBirth) || (isDeath && week > weekOfBirth);
-  $: checkIsCurrent = (week: number): boolean =>
+  $: checkIsCurrent = (week: number) =>
     year === currentYear && week === currentWeek;
-  $: checkIsHalf = (week: number): boolean =>
+  $: checkIsHalf = (week: number) =>
     week === 52 / 4 || week === 52 / 2 || week === (52 * 3) / 4;
   $: getContent = (week: number): number =>
     week === weekOfBirth && (year - yearOfBirth) % 5 === 0
@@ -53,7 +59,7 @@
 <style>
   .year {
     display: grid;
-    grid-template-columns: 1fr repeat(52, 1fr);
+    grid-template-columns: 1fr repeat(53, 1fr);
     gap: var(--weekMargin);
   }
   .year-name {
