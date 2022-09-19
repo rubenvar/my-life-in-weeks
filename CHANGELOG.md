@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.5.1] - 2022-09-19
+
+- Updated dependencies.
+- Tried to fix ts error (added `./global.d.ts`).
+
 ## [0.5.0] - 2022-03-18
 
 - Renamed stores files.
